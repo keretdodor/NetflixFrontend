@@ -29,7 +29,7 @@ pipeline {
             steps {             
                 sh '''
                   docker tag 838773efc48e "$DOCKER_USERNAME/$IMAGE_BASE_NAME:$IMAGE_TAG"
-                  docker push keretdodor"$DOCKER_USERNAME/$IMAGE_BASE_NAME:$IMAGE_TAG"
+                  docker push "$DOCKER_USERNAME/$IMAGE_BASE_NAME:$IMAGE_TAG"
                 '''
             }
         }
