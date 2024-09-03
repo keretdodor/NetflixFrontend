@@ -14,6 +14,7 @@ pipeline {
         DOCKER_CREDS = credentials('dockerhub')
         DOCKER_USERNAME = "${DOCKER_CREDS_USR}"  // Access DockerHub username
         DOCKER_PASS = "${DOCKER_CREDS_PSW}"      // Access DockerHub password
+        IMAGE_FULL_NAME = "${DOCKER_CREDS_USR}/${IMAGE_BASE_NAME}:${IMAGE_TAG}"  // Define image name with tag
     } 
 
     stages {
@@ -26,15 +27,11 @@ pipeline {
         }
         
         stage('Build & Push') {
-            steps {
-                script {
-                    // Define the IMAGE_FULL_NAME variable dynamically within the script block
-                    def IMAGE_FULL_NAME = "${DOCKER_USERNAME}/${IMAGE_BASE_NAME}:${IMAGE_TAG}"
-                    sh '''
-                      docker tag 838773efc48e ${IMAGE_FULL_NAME}  // Use the dynamic IMAGE_FULL_NAME variable
-                      docker push ${IMAGE_FULL_NAME}              // Push the tagged image to DockerHub
-                    '''
-                }
+            steps {             
+                sh '''
+                  docker tag 838773efc48e $IMAGE_FULL_NAME  // Use the dynamic IMAGE_FULL_NAME variable
+                  docker push $IMAGE_FULL_NAME              // Push the tagged image to DockerHub
+                '''
             }
         }
     }
