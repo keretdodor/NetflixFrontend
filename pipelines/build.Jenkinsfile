@@ -14,7 +14,7 @@ pipeline {
         DOCKER_CREDS = credentials('dockerhub')
         DOCKER_USERNAME = "${DOCKER_CREDS_USR}"  // Access DockerHub username
         DOCKER_PASS = "${DOCKER_CREDS_PSW}"      // Access DockerHub password
-        IMAGE_FULL_NAME = "${DOCKER_CREDS_USR}/${IMAGE_BASE_NAME}:${IMAGE_TAG}"  // Define image name with tag
+        IMAGE_FULL_NAME = "${DOCKER_USERNAME}/${IMAGE_BASE_NAME}:${IMAGE_TAG}"  // Define image name with tag
     } 
 
     stages {
