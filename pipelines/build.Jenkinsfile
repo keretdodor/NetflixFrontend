@@ -10,6 +10,7 @@ pipeline {
     environment {        
         IMAGE_TAG = "v1.0.$BUILD_NUMBER"
         IMAGE_BASE_NAME = "netflix-frontend"
+        IMAGE_FULL_NAME = "${DOCKER_USERNAME}/${IMAGE_BASE_NAME}:${IMAGE_TAG}" 
         
         DOCKER_CREDS = credentials('dockerhub')
         DOCKER_USERNAME = "${DOCKER_CREDS_USR}"  // The _USR suffix added to access the username value 
@@ -30,8 +31,8 @@ pipeline {
                 sh '''
                   IMAGE_FULL_NAME=$DOCKER_USERNAME/$IMAGE_BASE_NAME:$IMAGE_TAG
                 
-                  docker tag 838773efc48e keretdodor/netflix-frontend
-                  docker push keretdodor/netflix-frontend
+                  docker tag 838773efc48e $IMAGE_FULL_NAME 
+                  docker push $IMAGE_FULL_NAME 
                 '''
             }
         }
