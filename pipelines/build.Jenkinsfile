@@ -28,7 +28,7 @@ pipeline {
         stage('Build & Push') {
             steps {             
                 sh '''
-                  docker tag 838773efc48e "$DOCKER_USERNAME/$IMAGE_BASE_NAME:$IMAGE_TAG"
+                  docker build -t "$DOCKER_USERNAME/$IMAGE_BASE_NAME:$IMAGE_TAG" /home/keretdodor/Desktop/Netflix/NetflixFrontend/
                   docker push "$DOCKER_USERNAME/$IMAGE_BASE_NAME:$IMAGE_TAG"
                 '''
             }
