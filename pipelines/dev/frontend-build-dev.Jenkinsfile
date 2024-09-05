@@ -9,7 +9,7 @@ pipeline {
     
     environment {        
         IMAGE_TAG = "v1.0.$BUILD_NUMBER"
-        IMAGE_BASE_NAME = "netflix-frontend"
+        IMAGE_BASE_NAME = "netflix-frontend-dev"
         
         DOCKER_CREDS = credentials('dockerhub')
         DOCKER_USERNAME = "${DOCKER_CREDS_USR}"  // The _USR suffix added to access the username value 
@@ -35,7 +35,7 @@ pipeline {
         }
          stage('Trigger Deploy') {
     steps {
-        build job: 'DeployBuild', wait: false, parameters: [
+        build job: 'deploy-dev', wait: false, parameters: [
              string(name: 'SERVICE_NAME', value: "NetflixFrontend"),
              string(name: 'IMAGE_FULL_NAME_PARAM', value: "$DOCKER_USERNAME/$IMAGE_BASE_NAME:$IMAGE_TAG")
               ]
