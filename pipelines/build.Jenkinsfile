@@ -34,13 +34,13 @@ pipeline {
             }
         }
          stage('Trigger Deploy') {
-+     steps {
-+         build job: 'deploy.Jenkinsfile', wait: false, parameters: [
-+             string(name: 'SERVICE_NAME', value: "NetflixFrontend"),
-+             string(name: 'IMAGE_FULL_NAME_PARAM', value: "$DOCKER_USERNAME/$IMAGE_BASE_NAME:$IMAGE_TAG")
-+               ]
-+           }
-+       }
+    steps {
+        build job: 'DeployBuild', wait: false, parameters: [
+             string(name: 'SERVICE_NAME', value: "NetflixFrontend"),
+             string(name: 'IMAGE_FULL_NAME_PARAM', value: "$DOCKER_USERNAME/$IMAGE_BASE_NAME:$IMAGE_TAG")
+              ]
+           }
+       }
 
     }
 }
